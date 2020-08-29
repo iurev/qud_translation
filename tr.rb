@@ -11,16 +11,15 @@ class Dict
   private
 
   def cached(word)
-    file = nil
     begin
-      file = File.read('./cache.json')
+      @file ||= File.read('./cache.json')
     rescue => _e
       File.write('./cache.json', '{}')
-      file = File.read('./cache.json')
+      @file = File.read('./cache.json')
     end
-    content = JSON.parse(file)
-    return unless content[word]
-    definition(content[word]) || ''
+    @content||= JSON.parse(@file)
+    return unless @content[word]
+    definition(@content[word]) || ''
   end
 
   def from_request(word)
@@ -42,7 +41,10 @@ class Dict
     file = File.read('./cache.json')
     content = JSON.parse(file)
     content[word] = result
-    File.write('./cache.json', content.to_json)
+    json = content.to_json
+    File.write('./cache.json', json)
+    @file = json
+    @content||= content
 
     result
   end

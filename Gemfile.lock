@@ -1,11 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    RubyInline (3.12.5)
+      ZenTest (~> 4.3)
+    ZenTest (4.12.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.7)
     ethon (0.12.0)
       ffi (>= 1.3.0)
     ffi (1.13.1)
+    fuzzy-string-match (1.0.1)
+      RubyInline (>= 3.8.6)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
@@ -22,6 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fuzzy-string-match
   pry
   rexml
   russian
